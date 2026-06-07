@@ -104,9 +104,6 @@ export default function LoginPage() {
                         </button>
                     </form>
 
-                    <button type="button" className="auth-google-btn" style={{ marginTop: 10 }}>
-                        Google로 계속하기
-                    </button>
 
                     <p className="auth-switch-text" style={{ marginTop: 20 }}>
                         아직 계정이 없나요?{" "}
