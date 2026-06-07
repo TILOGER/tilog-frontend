@@ -15,8 +15,8 @@ export const request = async (url, options = {}) => {
     });
 
     if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || 'API 요청에 실패했습니다.');
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData?.message || 'API 요청에 실패했습니다.');
     }
 
     if (response.status === 204) {
