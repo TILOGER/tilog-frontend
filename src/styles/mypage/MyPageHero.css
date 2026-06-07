@@ -196,4 +196,8 @@
         transform: translateY(-1px);
     }
 
+    .mypage-role-badge[data-role="PREMIUM"] { background: rgba(234, 179, 8, 0.7); }
+    .mypage-role-badge[data-role="MENTOR"]  { background: rgba(22, 163, 74, 0.7); }
+    .mypage-role-badge[data-role="ADMIN"]   { background: rgba(220, 38, 38, 0.7); }
+
 }

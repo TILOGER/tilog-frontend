@@ -70,3 +70,12 @@ export const getCurrentPaybackParticipation = async () => {
 
     return unwrapApiResponse(response);
 };
+
+export const reissueToken = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/reissue`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+    });
+
+    return unwrapApiResponse(response);
+};

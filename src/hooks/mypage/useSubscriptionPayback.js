@@ -10,8 +10,11 @@ import {
     getMySubscriptionStatus,
     resumeSubscription,
     subscribePremium,
+    reissueToken
 } from '../../api/subscriptionPaybackApi';
 import { isLoggedIn } from '../../utils/authUtils';
+import { clearProfileCache } from '../../api/memberApi';
+
 
 export const useSubscriptionPayback = () => {
     const navigate = useNavigate();
@@ -71,6 +74,9 @@ export const useSubscriptionPayback = () => {
             setIsSubscriptionLoading(true);
 
             await subscribePremium();
+            const tokenData = await reissueToken();
+            localStorage.setItem('accessToken', tokenData.accessToken);
+            clearProfileCache();
             await refreshSubscriptionAndPayback();
         } catch (error) {
             console.error('[SUBSCRIBE API ERROR]', error);
@@ -93,6 +99,9 @@ export const useSubscriptionPayback = () => {
             setIsSubscriptionLoading(true);
 
             await cancelSubscription();
+            const tokenData = await reissueToken();
+            localStorage.setItem('accessToken', tokenData.accessToken);
+            clearProfileCache();
             await refreshSubscriptionAndPayback();
         } catch (error) {
             console.error('[SUBSCRIPTION CANCEL API ERROR]', error);

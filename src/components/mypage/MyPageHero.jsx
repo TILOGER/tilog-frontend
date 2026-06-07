@@ -11,9 +11,18 @@ const MyPageHero = () => {
     const [profile, setProfile] = useState({
         nickname: user?.nickname ?? 'user',
         email: user?.email ?? '',
+        role: user?.role ?? 'USER',
         currentStatus: null,
         targetJob: null,
     });
+
+    const ROLE_LABEL = {
+        USER: '일반',
+        PREMIUM: '프리미엄',
+        MENTOR: '멘토',
+        ADMIN: '관리자',
+    };
+
     const [profileImageUrl, setProfileImageUrl] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -64,6 +73,8 @@ const MyPageHero = () => {
         setProfile((prev) => ({
             ...prev,
             nickname: updated?.nickname ?? prev.nickname,
+            email: data?.email ?? prev.email,
+            role: data?.role ?? prev.role,
             currentStatus: updated?.currentStatus !== undefined ? updated.currentStatus : prev.currentStatus,
             targetJob: updated?.targetJob !== undefined ? updated.targetJob : prev.targetJob,
         }));
@@ -101,6 +112,9 @@ const MyPageHero = () => {
                     <div>
                         <div className="mypage-profile-title">
                             <h1>{profile.nickname}</h1>
+                            <span className="mypage-role-badge" data-role={profile.role}>
+                                {ROLE_LABEL[profile.role] ?? profile.role}
+                            </span>
                             <span>꾸준한 작성자</span>
                         </div>
 
